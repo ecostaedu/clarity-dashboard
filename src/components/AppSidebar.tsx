@@ -80,7 +80,7 @@ export function AppSidebar() {
         <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
           <Hexagon className="h-4 w-4 text-primary-foreground" />
         </div>
-        {!collapsed && <span className="font-semibold text-sidebar-foreground tracking-tight">Apex HR</span>}
+        {!collapsed && <span className="font-semibold text-sidebar-foreground tracking-tight">ConnectRH</span>}
       </div>
 
       {/* Main nav */}

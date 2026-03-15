@@ -3,6 +3,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+
+// Auth
+import LoginPage from "./pages/auth/LoginPage";
+import SignupPage from "./pages/auth/SignupPage";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 
 // Dashboard
 import Index from "./pages/Index.tsx";
@@ -53,102 +61,114 @@ import { AlertSettingsPage, RolesSettingsPage, SystemSettingsPage } from "./page
 
 const queryClient = new QueryClient();
 
+function P({ children }: { children: React.ReactNode }) {
+  return <ProtectedRoute>{children}</ProtectedRoute>;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          {/* Dashboard */}
-          <Route path="/" element={<Index />} />
+        <AuthProvider>
+          <Routes>
+            {/* Auth (public) */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-          {/* Cadastros */}
-          <Route path="/cadastros" element={<CadastrosIndex />} />
-          <Route path="/companies" element={<CompaniesList />} />
-          <Route path="/companies/new" element={<CompaniesNew />} />
-          <Route path="/companies/:id" element={<CompaniesDetail />} />
-          <Route path="/companies/:id/edit" element={<CompaniesEdit />} />
-          <Route path="/candidates" element={<CandidatesList />} />
-          <Route path="/candidates/new" element={<CandidatesNew />} />
-          <Route path="/candidates/:id" element={<CandidatesDetail />} />
-          <Route path="/candidates/:id/edit" element={<CandidatesEdit />} />
-          <Route path="/institutions" element={<InstitutionsList />} />
-          <Route path="/institutions/new" element={<InstitutionsNew />} />
-          <Route path="/institutions/:id" element={<InstitutionsDetail />} />
-          <Route path="/users" element={<UsersList />} />
-          <Route path="/users/new" element={<UsersNew />} />
-          <Route path="/users/:id" element={<UsersDetail />} />
-          <Route path="/educators" element={<EducatorsList />} />
-          <Route path="/educators/new" element={<EducatorsNew />} />
-          <Route path="/educators/:id" element={<EducatorsDetail />} />
+            {/* Dashboard */}
+            <Route path="/" element={<P><Index /></P>} />
 
-          {/* Recrutamento */}
-          <Route path="/recrutamento" element={<RecrutamentoIndex />} />
-          <Route path="/jobs" element={<JobsList />} />
-          <Route path="/jobs/new" element={<JobsNew />} />
-          <Route path="/jobs/:id" element={<JobsDetail />} />
-          <Route path="/processes" element={<ProcessesList />} />
-          <Route path="/processes/new" element={<ProcessesNew />} />
-          <Route path="/processes/:id" element={<ProcessesDetail />} />
-          <Route path="/tests" element={<TestsList />} />
-          <Route path="/tests/new" element={<TestsNew />} />
-          <Route path="/tests/:id" element={<TestsDetail />} />
+            {/* Cadastros */}
+            <Route path="/cadastros" element={<P><CadastrosIndex /></P>} />
+            <Route path="/companies" element={<P><CompaniesList /></P>} />
+            <Route path="/companies/new" element={<P><CompaniesNew /></P>} />
+            <Route path="/companies/:id" element={<P><CompaniesDetail /></P>} />
+            <Route path="/companies/:id/edit" element={<P><CompaniesEdit /></P>} />
+            <Route path="/candidates" element={<P><CandidatesList /></P>} />
+            <Route path="/candidates/new" element={<P><CandidatesNew /></P>} />
+            <Route path="/candidates/:id" element={<P><CandidatesDetail /></P>} />
+            <Route path="/candidates/:id/edit" element={<P><CandidatesEdit /></P>} />
+            <Route path="/institutions" element={<P><InstitutionsList /></P>} />
+            <Route path="/institutions/new" element={<P><InstitutionsNew /></P>} />
+            <Route path="/institutions/:id" element={<P><InstitutionsDetail /></P>} />
+            <Route path="/users" element={<P><UsersList /></P>} />
+            <Route path="/users/new" element={<P><UsersNew /></P>} />
+            <Route path="/users/:id" element={<P><UsersDetail /></P>} />
+            <Route path="/educators" element={<P><EducatorsList /></P>} />
+            <Route path="/educators/new" element={<P><EducatorsNew /></P>} />
+            <Route path="/educators/:id" element={<P><EducatorsDetail /></P>} />
 
-          {/* Contratos */}
-          <Route path="/contratos" element={<ContractsList />} />
-          <Route path="/contracts" element={<ContractsList />} />
-          <Route path="/contracts/new" element={<ContractsNew />} />
-          <Route path="/contracts/:id" element={<ContractsDetail />} />
-          <Route path="/signatures" element={<SignaturesList />} />
+            {/* Recrutamento */}
+            <Route path="/recrutamento" element={<P><RecrutamentoIndex /></P>} />
+            <Route path="/jobs" element={<P><JobsList /></P>} />
+            <Route path="/jobs/new" element={<P><JobsNew /></P>} />
+            <Route path="/jobs/:id" element={<P><JobsDetail /></P>} />
+            <Route path="/processes" element={<P><ProcessesList /></P>} />
+            <Route path="/processes/new" element={<P><ProcessesNew /></P>} />
+            <Route path="/processes/:id" element={<P><ProcessesDetail /></P>} />
+            <Route path="/tests" element={<P><TestsList /></P>} />
+            <Route path="/tests/new" element={<P><TestsNew /></P>} />
+            <Route path="/tests/:id" element={<P><TestsDetail /></P>} />
 
-          {/* Gestão de Estágio */}
-          <Route path="/estagios" element={<EstagiosIndex />} />
-          <Route path="/attendance" element={<AttendancePage />} />
-          <Route path="/reports/activities" element={<ActivityReportsPage />} />
+            {/* Contratos */}
+            <Route path="/contratos" element={<P><ContractsList /></P>} />
+            <Route path="/contracts" element={<P><ContractsList /></P>} />
+            <Route path="/contracts/new" element={<P><ContractsNew /></P>} />
+            <Route path="/contracts/:id" element={<P><ContractsDetail /></P>} />
+            <Route path="/signatures" element={<P><SignaturesList /></P>} />
 
-          {/* Jovem Aprendiz */}
-          <Route path="/jovem-aprendiz" element={<JovemAprendizIndex />} />
-          <Route path="/programs" element={<ProgramsList />} />
-          <Route path="/programs/new" element={<ProgramsNew />} />
-          <Route path="/classes" element={<ClassesList />} />
-          <Route path="/classes/new" element={<ClassesNew />} />
-          <Route path="/occurrences" element={<OccurrencesList />} />
-          <Route path="/holidays" element={<HolidaysList />} />
-          <Route path="/vacations" element={<VacationsList />} />
+            {/* Gestão de Estágio */}
+            <Route path="/estagios" element={<P><EstagiosIndex /></P>} />
+            <Route path="/attendance" element={<P><AttendancePage /></P>} />
+            <Route path="/reports/activities" element={<P><ActivityReportsPage /></P>} />
 
-          {/* Financeiro */}
-          <Route path="/financeiro" element={<FinanceiroIndex />} />
-          <Route path="/plans" element={<PlansList />} />
-          <Route path="/plans/new" element={<PlansNew />} />
-          <Route path="/invoices" element={<InvoicesList />} />
-          <Route path="/finance/receivable" element={<ReceivableList />} />
-          <Route path="/finance/payable" element={<PayableList />} />
+            {/* Jovem Aprendiz */}
+            <Route path="/jovem-aprendiz" element={<P><JovemAprendizIndex /></P>} />
+            <Route path="/programs" element={<P><ProgramsList /></P>} />
+            <Route path="/programs/new" element={<P><ProgramsNew /></P>} />
+            <Route path="/classes" element={<P><ClassesList /></P>} />
+            <Route path="/classes/new" element={<P><ClassesNew /></P>} />
+            <Route path="/occurrences" element={<P><OccurrencesList /></P>} />
+            <Route path="/holidays" element={<P><HolidaysList /></P>} />
+            <Route path="/vacations" element={<P><VacationsList /></P>} />
 
-          {/* Relatórios */}
-          <Route path="/relatorios" element={<RelatoriosIndex />} />
-          <Route path="/reports/financial" element={<FinancialReportsPage />} />
-          <Route path="/reports/apprenticeship" element={<ApprenticeReportsPage />} />
+            {/* Financeiro */}
+            <Route path="/financeiro" element={<P><FinanceiroIndex /></P>} />
+            <Route path="/plans" element={<P><PlansList /></P>} />
+            <Route path="/plans/new" element={<P><PlansNew /></P>} />
+            <Route path="/invoices" element={<P><InvoicesList /></P>} />
+            <Route path="/finance/receivable" element={<P><ReceivableList /></P>} />
+            <Route path="/finance/payable" element={<P><PayableList /></P>} />
 
-          {/* Chamados */}
-          <Route path="/chamados" element={<TicketsList />} />
-          <Route path="/tickets" element={<TicketsList />} />
-          <Route path="/tickets/new" element={<TicketsNew />} />
-          <Route path="/tickets/:id" element={<TicketsDetail />} />
+            {/* Relatórios */}
+            <Route path="/relatorios" element={<P><RelatoriosIndex /></P>} />
+            <Route path="/reports/financial" element={<P><FinancialReportsPage /></P>} />
+            <Route path="/reports/apprenticeship" element={<P><ApprenticeReportsPage /></P>} />
 
-          {/* CRM */}
-          <Route path="/crm" element={<OpportunitiesList />} />
-          <Route path="/crm/opportunities" element={<OpportunitiesList />} />
+            {/* Chamados */}
+            <Route path="/chamados" element={<P><TicketsList /></P>} />
+            <Route path="/tickets" element={<P><TicketsList /></P>} />
+            <Route path="/tickets/new" element={<P><TicketsNew /></P>} />
+            <Route path="/tickets/:id" element={<P><TicketsDetail /></P>} />
 
-          {/* Configurações */}
-          <Route path="/configuracoes" element={<ConfiguracoesIndex />} />
-          <Route path="/settings/alerts" element={<AlertSettingsPage />} />
-          <Route path="/settings/roles" element={<RolesSettingsPage />} />
-          <Route path="/settings/system" element={<SystemSettingsPage />} />
+            {/* CRM */}
+            <Route path="/crm" element={<P><OpportunitiesList /></P>} />
+            <Route path="/crm/opportunities" element={<P><OpportunitiesList /></P>} />
 
-          {/* Catch-all */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            {/* Configurações */}
+            <Route path="/configuracoes" element={<P><ConfiguracoesIndex /></P>} />
+            <Route path="/settings/alerts" element={<P><AlertSettingsPage /></P>} />
+            <Route path="/settings/roles" element={<P><RolesSettingsPage /></P>} />
+            <Route path="/settings/system" element={<P><SystemSettingsPage /></P>} />
+
+            {/* Catch-all */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
