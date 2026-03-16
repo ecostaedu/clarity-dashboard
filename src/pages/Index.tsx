@@ -198,7 +198,7 @@ const Index = () => {
             {/* Table */}
             <div>
               <h2 className="text-lg font-semibold text-foreground tracking-tight mb-4">Processos Seletivos</h2>
-              <DataTable columns={tableColumns} data={tableData} onRowClick={handleRowClick} renderCell={renderCell} />
+              <DataTable columns={tableColumns} data={tableData} onRowClick={handleRowClick} />
             </div>
           </div>
         </div>
