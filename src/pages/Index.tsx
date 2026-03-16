@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Briefcase, FileText, PenTool, DollarSign, TrendingUp, Users, Calendar, ArrowRight, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { StatsCard } from "@/components/StatsCard";
-import { DataTable } from "@/components/DataTable";
+import { DataTable, type Column } from "@/components/DataTable";
 import { ContextPanel } from "@/components/ContextPanel";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
@@ -19,9 +19,16 @@ const stats = [
   { label: "Receita Mensal", value: "R$ 142k", trend: { value: "+18%", positive: true }, icon: DollarSign },
 ];
 
-const tableColumns = [
+const tableColumns: Column[] = [
   { key: "name", label: "Nome", sortable: true },
-  { key: "status", label: "Status", sortable: true },
+  { key: "status", label: "Status", sortable: true, render: (value) => (
+    <span className={cn(
+      "px-2 py-0.5 rounded text-xs font-medium",
+      value === "Ativo" && "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+      value === "Pendente" && "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+      value === "Concluído" && "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
+    )}>{value}</span>
+  )},
   { key: "owner", label: "Responsável", sortable: true },
   { key: "department", label: "Departamento", sortable: true },
   { key: "lastUpdate", label: "Atualizado", sortable: true },
@@ -62,22 +69,6 @@ const Index = () => {
   const handleRowClick = (row: any) => {
     setSelectedItem({ ...row, type: "Documento" });
     setPanelOpen(true);
-  };
-
-  const renderCell = (key: string, value: any) => {
-    if (key === "status") {
-      return (
-        <span className={cn(
-          "px-2 py-0.5 rounded text-xs font-medium",
-          value === "Ativo" && "bg-success/10 text-success",
-          value === "Pendente" && "bg-warning/10 text-warning",
-          value === "Concluído" && "bg-info/10 text-info",
-        )}>
-          {value}
-        </span>
-      );
-    }
-    return value;
   };
 
   return (
@@ -207,7 +198,7 @@ const Index = () => {
             {/* Table */}
             <div>
               <h2 className="text-lg font-semibold text-foreground tracking-tight mb-4">Processos Seletivos</h2>
-              <DataTable columns={tableColumns} data={tableData} onRowClick={handleRowClick} renderCell={renderCell} />
+              <DataTable columns={tableColumns} data={tableData} onRowClick={handleRowClick} />
             </div>
           </div>
         </div>

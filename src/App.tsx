@@ -19,6 +19,13 @@ import PlaceholderPage from "./pages/PlaceholderPage";
 
 // Cadastros
 import CadastrosIndex from "./pages/cadastros/CadastrosIndex";
+import EmpresasPage from "./pages/cadastros/EmpresasPage";
+import InstituicoesPage from "./pages/cadastros/InstituicoesPage";
+import UsuariosPage from "./pages/cadastros/UsuariosPage";
+import CandidatosPage from "./pages/cadastros/CandidatosPage";
+import AniversariantesPage from "./pages/cadastros/AniversariantesPage";
+import EducadoresPage from "./pages/cadastros/EducadoresPage";
+import AssistentesSociaisPage from "./pages/cadastros/AssistentesSociaisPage";
 import { CompaniesList, CompaniesNew, CompaniesDetail, CompaniesEdit } from "./pages/companies/CompaniesPages";
 import { CandidatesList, CandidatesNew, CandidatesDetail, CandidatesEdit } from "./pages/candidates/CandidatesPages";
 import { InstitutionsList, InstitutionsNew, InstitutionsDetail } from "./pages/institutions/InstitutionsPages";
@@ -87,9 +94,13 @@ const App = () => (
 
             {/* Cadastros */}
             <Route path="/cadastros" element={<P><CadastrosIndex /></P>} />
-            <Route path="/cadastros/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/companies" element={<P><CompaniesList /></P>} />
-            <Route path="/companies/new" element={<P><CompaniesNew /></P>} />
+            <Route path="/cadastros/empresas" element={<P><EmpresasPage /></P>} />
+            <Route path="/cadastros/instituicoes" element={<P><InstituicoesPage /></P>} />
+            <Route path="/cadastros/usuarios" element={<P><UsuariosPage /></P>} />
+            <Route path="/cadastros/candidatos" element={<P><CandidatosPage /></P>} />
+            <Route path="/cadastros/aniversariantes" element={<P><AniversariantesPage /></P>} />
+            <Route path="/cadastros/educadores" element={<P><EducadoresPage /></P>} />
+            <Route path="/cadastros/assistentes-sociais" element={<P><AssistentesSociaisPage /></P>} />
             <Route path="/companies/:id" element={<P><CompaniesDetail /></P>} />
             <Route path="/companies/:id/edit" element={<P><CompaniesEdit /></P>} />
             <Route path="/candidates" element={<P><CandidatesList /></P>} />
