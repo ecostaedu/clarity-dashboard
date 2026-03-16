@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Briefcase, FileText, PenTool, DollarSign, TrendingUp, Users, Calendar, ArrowRight, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { StatsCard } from "@/components/StatsCard";
-import { DataTable } from "@/components/DataTable";
+import { DataTable, type Column } from "@/components/DataTable";
 import { ContextPanel } from "@/components/ContextPanel";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Button } from "@/components/ui/button";
