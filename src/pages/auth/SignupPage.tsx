@@ -74,7 +74,7 @@ const studentSchema = z.object({
     .regex(/[0-9]/, "Deve ter número")
     .regex(/[^A-Za-z0-9]/, "Deve ter caractere especial"),
   confirmPassword: z.string(),
-  terms: z.literal(true, { errorMap: () => ({ message: "Aceite os termos" }) }),
+  terms: z.literal(true, { message: "Aceite os termos" }),
 }).refine((d) => d.password === d.confirmPassword, { message: "Senhas não coincidem", path: ["confirmPassword"] });
 
 type CompanyForm = z.infer<typeof companySchema>;
