@@ -71,22 +71,6 @@ const Index = () => {
     setPanelOpen(true);
   };
 
-  const renderCell = (key: string, value: any) => {
-    if (key === "status") {
-      return (
-        <span className={cn(
-          "px-2 py-0.5 rounded text-xs font-medium",
-          value === "Ativo" && "bg-success/10 text-success",
-          value === "Pendente" && "bg-warning/10 text-warning",
-          value === "Concluído" && "bg-info/10 text-info",
-        )}>
-          {value}
-        </span>
-      );
-    }
-    return value;
-  };
-
   return (
     <DashboardLayout breadcrumbs={[{ label: "Home" }, { label: "Dashboard" }]}>
       <div className="flex gap-0 -m-8">
