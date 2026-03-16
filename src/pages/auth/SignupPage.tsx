@@ -48,7 +48,7 @@ const companySchema = z.object({
   confirmPassword: z.string(),
   contactName: z.string().min(1, "Nome do contato obrigatório"),
   phone: z.string().optional(),
-  terms: z.literal(true, { errorMap: () => ({ message: "Aceite os termos" }) }),
+  terms: z.literal(true, { message: "Aceite os termos" }),
 }).refine((d) => d.password === d.confirmPassword, { message: "Senhas não coincidem", path: ["confirmPassword"] });
 
 const studentSchema = z.object({
