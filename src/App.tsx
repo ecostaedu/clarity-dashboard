@@ -19,6 +19,14 @@ import PlaceholderPage from "./pages/PlaceholderPage";
 
 // Cadastros
 import CadastrosIndex from "./pages/cadastros/CadastrosIndex";
+import EmpresasPage from "./pages/cadastros/EmpresasPage";
+import InstituicoesPage from "./pages/cadastros/InstituicoesPage";
+import UsuariosPage from "./pages/cadastros/UsuariosPage";
+import CandidatosPage from "./pages/cadastros/CandidatosPage";
+import AniversariantesPage from "./pages/cadastros/AniversariantesPage";
+import EducadoresPage from "./pages/cadastros/EducadoresPage";
+import AssistentesSociaisPage from "./pages/cadastros/AssistentesSociaisPage";
+import CadastrosIndex from "./pages/cadastros/CadastrosIndex";
 import { CompaniesList, CompaniesNew, CompaniesDetail, CompaniesEdit } from "./pages/companies/CompaniesPages";
 import { CandidatesList, CandidatesNew, CandidatesDetail, CandidatesEdit } from "./pages/candidates/CandidatesPages";
 import { InstitutionsList, InstitutionsNew, InstitutionsDetail } from "./pages/institutions/InstitutionsPages";
