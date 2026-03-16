@@ -1,4 +1,4 @@
-import { Search, Bell, Moon, Sun, ChevronRight, LogOut } from "lucide-react";
+import { Bell, Moon, Sun, ChevronRight, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/contexts/AuthContext";
@@ -38,16 +38,6 @@ export function TopNavbar({ breadcrumbs = [{ label: "Home" }, { label: "Dashboar
 
       {/* Right section */}
       <div className="flex items-center gap-2">
-        {/* Search */}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Pesquisar..."
-            className="h-9 w-64 pl-9 pr-4 rounded-lg bg-background border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
-          />
-        </div>
-
         {/* Theme toggle */}
         <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
           {resolvedTheme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -56,14 +46,20 @@ export function TopNavbar({ breadcrumbs = [{ label: "Home" }, { label: "Dashboar
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="h-9 w-9 relative">
           <Bell className="h-4 w-4" />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-destructive" />
         </Button>
 
         {/* User dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center ml-1 cursor-pointer hover:bg-primary/20 transition-colors">
-              <span className="text-xs font-semibold text-primary">{initials}</span>
+            <button className="flex items-center gap-2 ml-2 cursor-pointer hover:opacity-80 transition-opacity">
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-xs font-semibold text-primary">{initials}</span>
+              </div>
+              <div className="hidden md:block text-left">
+                <p className="text-sm font-medium text-foreground leading-tight">{profile?.name ?? "Usuário"}</p>
+                <p className="text-[11px] text-muted-foreground leading-tight">{profile?.email}</p>
+              </div>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
