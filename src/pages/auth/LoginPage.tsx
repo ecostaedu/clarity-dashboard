@@ -4,20 +4,60 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Hexagon, Eye, EyeOff } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
+function detectInputType(value: string): "email" | "cpf" | "cnpj" | "unknown" {
+  const digits = value.replace(/\D/g, "");
+  if (value.includes("@")) return "email";
+  if (digits.length === 11) return "cpf";
+  if (digits.length === 14) return "cnpj";
+  return "unknown";
+}
+
+function maskCpfCnpj(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  if (digits.length <= 11) {
+    return digits
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  }
+  return digits
+    .replace(/(\d{2})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+}
+
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
+  const handleIdentifierChange = (val: string) => {
+    if (val.includes("@") || val === "") {
+      setIdentifier(val);
+    } else {
+      setIdentifier(maskCpfCnpj(val));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const type = detectInputType(identifier);
+    if (type === "unknown" && identifier.length > 0) {
+      toast.error("Informe um e-mail, CPF (11 dígitos) ou CNPJ (14 dígitos) válido.");
+      return;
+    }
     setLoading(true);
+    // For auth we use email; CPF/CNPJ lookup would be done server-side
+    const email = type === "email" ? identifier : identifier.replace(/\D/g, "") + "@cpfcnpj.local";
     const { error } = await signIn(email, password);
     setLoading(false);
     if (error) {
@@ -29,43 +69,42 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Left panel */}
+      {/* Left branding panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-primary items-center justify-center p-12">
         <div className="text-center space-y-6">
-          <div className="h-16 w-16 rounded-2xl bg-primary-foreground/20 flex items-center justify-center mx-auto">
-            <Hexagon className="h-8 w-8 text-primary-foreground" />
+          <div className="h-20 w-20 rounded-2xl bg-primary-foreground/20 flex items-center justify-center mx-auto">
+            <span className="text-primary-foreground font-heading font-bold text-2xl">LR</span>
           </div>
-          <h1 className="text-3xl font-bold text-primary-foreground">ConnectRH</h1>
-          <p className="text-primary-foreground/70 max-w-sm">
-            Plataforma SaaS completa para gestão de estágios, jovem aprendiz e recrutamento.
+          <h1 className="text-4xl font-heading font-bold text-primary-foreground">LideraRH</h1>
+          <p className="text-primary-foreground/70 max-w-sm text-lg">
+            Plataforma completa para gestão de estágios, jovem aprendiz e recrutamento.
           </p>
         </div>
       </div>
 
-      {/* Right panel */}
+      {/* Right form panel */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-sm space-y-8">
           <div className="lg:hidden flex items-center gap-3 justify-center mb-4">
             <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-              <Hexagon className="h-5 w-5 text-primary-foreground" />
+              <span className="text-primary-foreground font-heading font-bold text-sm">LR</span>
             </div>
-            <span className="text-xl font-bold text-foreground">ConnectRH</span>
+            <span className="text-xl font-heading font-bold text-foreground">LideraRH</span>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-foreground">Entrar</h2>
+            <h2 className="text-2xl font-heading font-bold text-foreground">Entrar</h2>
             <p className="text-sm text-muted-foreground mt-1">Acesse sua conta para continuar</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
+              <Label htmlFor="identifier">E-mail, CPF ou CNPJ</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="identifier"
+                placeholder="seu@email.com ou CPF/CNPJ"
+                value={identifier}
+                onChange={(e) => handleIdentifierChange(e.target.value)}
                 required
               />
             </div>
@@ -96,7 +135,16 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="remember"
+                checked={rememberMe}
+                onCheckedChange={(c) => setRememberMe(!!c)}
+              />
+              <Label htmlFor="remember" className="text-sm font-normal cursor-pointer">Lembrar de mim</Label>
+            </div>
+
+            <Button type="submit" className="w-full shadow-btn" disabled={loading}>
               {loading ? "Entrando..." : "Entrar"}
             </Button>
           </form>

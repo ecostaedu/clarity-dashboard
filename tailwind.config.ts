@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["Open Sans", "system-ui", "-apple-system", "sans-serif"],
+        heading: ["Roboto", "system-ui", "-apple-system", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -83,6 +84,7 @@ export default {
         card: "var(--card-shadow)",
         "card-hover": "var(--card-shadow-hover)",
         soft: "0 1px 2px rgba(0,0,0,0.05)",
+        "btn": "0 1px 3px rgba(0,0,0,0.08)",
       },
       keyframes: {
         "accordion-down": {
