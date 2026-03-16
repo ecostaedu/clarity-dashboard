@@ -49,7 +49,7 @@ export default function EmpresasPage() {
 
   const actions: ActionConfig[] = [
     { label: "Visualizar", icon: <Eye className="h-4 w-4" />, onClick: (row) => { setSelected(row); setViewOpen(true); } },
-    { label: "Editar", icon: <Pencil className="h-4 w-4" />, onClick: (row) => { setForm(row); setEditing(true); setModalOpen(true); } },
+    { label: "Editar", icon: <Pencil className="h-4 w-4" />, onClick: (row) => { setForm(row as any); setEditing(true); setModalOpen(true); } },
     { label: "Inativar", icon: <Ban className="h-4 w-4" />, onClick: (row) => { setSelected(row); setConfirmOpen(true); }, variant: "destructive" },
   ];
 

@@ -55,7 +55,7 @@ export default function CandidatosPage() {
 
   const actions: ActionConfig[] = [
     { label: "Visualizar Perfil", icon: <Eye className="h-4 w-4" />, onClick: (row) => { setSelected(row); setViewOpen(true); } },
-    { label: "Editar", icon: <Pencil className="h-4 w-4" />, onClick: (row) => { setForm(row); setEditing(true); setModalOpen(true); } },
+    { label: "Editar", icon: <Pencil className="h-4 w-4" />, onClick: (row) => { setForm(row as any); setEditing(true); setModalOpen(true); } },
     { label: "Mover p/ Processo", icon: <Briefcase className="h-4 w-4" />, onClick: (row) => { setData(data.map((d) => d.id === row.id ? { ...d, status: "em_processo" } : d)); toast.success(`${row.nome} movido para processo seletivo.`); } },
     { label: "Contratar", icon: <UserPlus className="h-4 w-4" />, onClick: (row) => { setData(data.map((d) => d.id === row.id ? { ...d, status: "contratado" } : d)); toast.success(`${row.nome} contratado!`); } },
     { label: "Excluir", icon: <Trash2 className="h-4 w-4" />, onClick: (row) => { setSelected(row); setConfirmOpen(true); }, variant: "destructive" },
