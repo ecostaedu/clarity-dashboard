@@ -32,11 +32,16 @@ import { InstitutionsList, InstitutionsNew, InstitutionsDetail } from "./pages/i
 import { UsersList, UsersNew, UsersDetail } from "./pages/users/UsersPages";
 import { EducatorsList, EducatorsNew, EducatorsDetail } from "./pages/educators/EducatorsPages";
 
+// Vagas
+import GestaoVagasPage from "./pages/vagas/GestaoVagasPage";
+
 // Recrutamento
 import RecrutamentoIndex from "./pages/recrutamento/RecrutamentoIndex";
-import { JobsList, JobsNew, JobsDetail } from "./pages/recruitment/RecruitmentPages";
-import { ProcessesList, ProcessesNew, ProcessesDetail } from "./pages/recruitment/RecruitmentPages";
-import { TestsList, TestsNew, TestsDetail } from "./pages/recruitment/RecruitmentPages";
+import ProcessosSeletivosPage from "./pages/recrutamento/ProcessosSeletivosPage";
+import AuditoriaPage from "./pages/recrutamento/AuditoriaPage";
+import CadastroProcessosPage from "./pages/recrutamento/CadastroProcessosPage";
+import CategoriasProvaPage from "./pages/recrutamento/CategoriasProvaPage";
+import ProvasPage from "./pages/recrutamento/ProvasPage";
 
 // Contratos
 import { ContractsList, ContractsNew, ContractsDetail, SignaturesList } from "./pages/contracts/ContractsPages";
