@@ -123,21 +123,16 @@ const App = () => (
             <Route path="/educators/:id" element={<P><EducatorsDetail /></P>} />
 
             {/* Vagas */}
-            <Route path="/vagas" element={<P><PlaceholderPage /></P>} />
-            <Route path="/vagas/*" element={<P><PlaceholderPage /></P>} />
+            <Route path="/vagas" element={<Navigate to="/vagas/gestao" replace />} />
+            <Route path="/vagas/gestao" element={<P><GestaoVagasPage /></P>} />
 
             {/* Recrutamento */}
             <Route path="/recrutamento" element={<P><RecrutamentoIndex /></P>} />
-            <Route path="/recrutamento/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/jobs" element={<P><JobsList /></P>} />
-            <Route path="/jobs/new" element={<P><JobsNew /></P>} />
-            <Route path="/jobs/:id" element={<P><JobsDetail /></P>} />
-            <Route path="/processes" element={<P><ProcessesList /></P>} />
-            <Route path="/processes/new" element={<P><ProcessesNew /></P>} />
-            <Route path="/processes/:id" element={<P><ProcessesDetail /></P>} />
-            <Route path="/tests" element={<P><TestsList /></P>} />
-            <Route path="/tests/new" element={<P><TestsNew /></P>} />
-            <Route path="/tests/:id" element={<P><TestsDetail /></P>} />
+            <Route path="/recrutamento/processos" element={<P><ProcessosSeletivosPage /></P>} />
+            <Route path="/recrutamento/auditoria" element={<P><AuditoriaPage /></P>} />
+            <Route path="/recrutamento/cadastro-processos" element={<P><CadastroProcessosPage /></P>} />
+            <Route path="/recrutamento/categorias-prova" element={<P><CategoriasProvaPage /></P>} />
+            <Route path="/recrutamento/provas" element={<P><ProvasPage /></P>} />
 
             {/* Contratos */}
             <Route path="/contratos" element={<P><ContractsList /></P>} />
