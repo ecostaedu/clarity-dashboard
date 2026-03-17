@@ -1,11 +1,13 @@
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-import { Briefcase, ClipboardList, FileCheck } from "lucide-react";
+import { ClipboardList, Shield, FolderPlus, Tag, FileCheck } from "lucide-react";
 
 const sections = [
-  { title: "Vagas", desc: "Vagas abertas e encerradas", icon: Briefcase, route: "/jobs", count: 5 },
-  { title: "Processos Seletivos", desc: "Gerencie processos de seleção", icon: ClipboardList, route: "/processes", count: 3 },
-  { title: "Testes", desc: "Banco de testes e avaliações", icon: FileCheck, route: "/tests", count: 3 },
+  { title: "Processos Seletivos", desc: "Gerencie processos de seleção ativos", icon: ClipboardList, route: "/recrutamento/processos", count: 3 },
+  { title: "Cadastro de Processos", desc: "Crie e edite processos", icon: FolderPlus, route: "/recrutamento/cadastro-processos", count: 2 },
+  { title: "Categorias de Prova", desc: "Organize categorias de avaliação", icon: Tag, route: "/recrutamento/categorias-prova", count: 4 },
+  { title: "Provas", desc: "Banco de provas e questões", icon: FileCheck, route: "/recrutamento/provas", count: 3 },
+  { title: "Auditoria", desc: "Histórico de alterações", icon: Shield, route: "/recrutamento/auditoria", count: 5 },
 ];
 
 export default function RecrutamentoIndex() {
@@ -15,7 +17,7 @@ export default function RecrutamentoIndex() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-foreground tracking-tight">Recrutamento</h1>
-          <p className="text-sm text-muted-foreground mt-1">Gerencie vagas, processos seletivos e testes.</p>
+          <p className="text-sm text-muted-foreground mt-1">Gerencie processos seletivos, provas e auditoria.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {sections.map((s) => (
