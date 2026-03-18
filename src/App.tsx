@@ -26,11 +26,6 @@ import CandidatosPage from "./pages/cadastros/CandidatosPage";
 import AniversariantesPage from "./pages/cadastros/AniversariantesPage";
 import EducadoresPage from "./pages/cadastros/EducadoresPage";
 import AssistentesSociaisPage from "./pages/cadastros/AssistentesSociaisPage";
-import { CompaniesList, CompaniesNew, CompaniesDetail, CompaniesEdit } from "./pages/companies/CompaniesPages";
-import { CandidatesList, CandidatesNew, CandidatesDetail, CandidatesEdit } from "./pages/candidates/CandidatesPages";
-import { InstitutionsList, InstitutionsNew, InstitutionsDetail } from "./pages/institutions/InstitutionsPages";
-import { UsersList, UsersNew, UsersDetail } from "./pages/users/UsersPages";
-import { EducatorsList, EducatorsNew, EducatorsDetail } from "./pages/educators/EducatorsPages";
 
 // Vagas
 import GestaoVagasPage from "./pages/vagas/GestaoVagasPage";
@@ -44,15 +39,42 @@ import CategoriasProvaPage from "./pages/recrutamento/CategoriasProvaPage";
 import ProvasPage from "./pages/recrutamento/ProvasPage";
 
 // Contratos
-import { ContractsList, ContractsNew, ContractsDetail, SignaturesList } from "./pages/contracts/ContractsPages";
+import ContratosIndex from "./pages/contratos/ContratosIndex";
+import ContratoEstagioPage from "./pages/contratos/ContratoEstagioPage";
+import AssinaturasDigitaisPage from "./pages/contratos/AssinaturasDigitaisPage";
+import ModelosPage from "./pages/contratos/ModelosPage";
+import ContratoParceriaPage from "./pages/contratos/ContratoParceriaPage";
+import DocumentosObrigatoriosPage from "./pages/contratos/DocumentosObrigatoriosPage";
+import FollowUpPage from "./pages/contratos/FollowUpPage";
 
-// Estágio
-import EstagiosIndex from "./pages/estagios/EstagiosIndex";
-import { AttendancePage, ActivityReportsPage } from "./pages/internship/InternshipPages";
+// Gestão de Estágio
+import GestaoEstagioIndex from "./pages/gestao-estagio/GestaoEstagioIndex";
+import FrequenciaPage from "./pages/gestao-estagio/FrequenciaPage";
+import RecessoPage from "./pages/gestao-estagio/RecessoPage";
+import AtividadesPage from "./pages/gestao-estagio/AtividadesPage";
+import AlertasEstagioPage from "./pages/gestao-estagio/AlertasEstagioPage";
 
 // Jovem Aprendiz
 import JovemAprendizIndex from "./pages/jovem-aprendiz/JovemAprendizIndex";
-import { ProgramsList, ProgramsNew, ClassesList, ClassesNew, OccurrencesList, HolidaysList, VacationsList } from "./pages/apprentice/ApprenticePages";
+import ModelosJAPage from "./pages/jovem-aprendiz/ModelosJAPage";
+import SalasPage from "./pages/jovem-aprendiz/SalasPage";
+import ProgramasJAPage from "./pages/jovem-aprendiz/ProgramasJAPage";
+import PlanejamentoTurmasPage from "./pages/jovem-aprendiz/PlanejamentoTurmasPage";
+import ContratoJAPage from "./pages/jovem-aprendiz/ContratoJAPage";
+import ContratoPreJAPage from "./pages/jovem-aprendiz/ContratoPreJAPage";
+import AssinaturasJAPage from "./pages/jovem-aprendiz/AssinaturasJAPage";
+import OcorrenciasJAPage from "./pages/jovem-aprendiz/OcorrenciasJAPage";
+import FrequenciaJAPage from "./pages/jovem-aprendiz/FrequenciaJAPage";
+import FeriadosJAPage from "./pages/jovem-aprendiz/FeriadosJAPage";
+import FeriasJAPage from "./pages/jovem-aprendiz/FeriasJAPage";
+import GerarFolhaPage from "./pages/jovem-aprendiz/GerarFolhaPage";
+import FaturasJAPage from "./pages/jovem-aprendiz/FaturasJAPage";
+import ReciboPagamentoPage from "./pages/jovem-aprendiz/ReciboPagamentoPage";
+import PerguntasSocioPage from "./pages/jovem-aprendiz/PerguntasSocioPage";
+import RegistroSocialPage from "./pages/jovem-aprendiz/RegistroSocialPage";
+import CronogramasPage from "./pages/jovem-aprendiz/CronogramasPage";
+import TiposModulosPage from "./pages/jovem-aprendiz/TiposModulosPage";
+import TiposCursoPage from "./pages/jovem-aprendiz/TiposCursoPage";
 
 // Financeiro
 import FinanceiroIndex from "./pages/financeiro/FinanceiroIndex";
@@ -86,13 +108,13 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            {/* Auth (public) */}
+            {/* Auth */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-            {/* Home & Dashboard */}
+            {/* Home */}
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<P><Index /></P>} />
             <Route path="/dashboard" element={<P><Index /></P>} />
@@ -106,21 +128,6 @@ const App = () => (
             <Route path="/cadastros/aniversariantes" element={<P><AniversariantesPage /></P>} />
             <Route path="/cadastros/educadores" element={<P><EducadoresPage /></P>} />
             <Route path="/cadastros/assistentes-sociais" element={<P><AssistentesSociaisPage /></P>} />
-            <Route path="/companies/:id" element={<P><CompaniesDetail /></P>} />
-            <Route path="/companies/:id/edit" element={<P><CompaniesEdit /></P>} />
-            <Route path="/candidates" element={<P><CandidatesList /></P>} />
-            <Route path="/candidates/new" element={<P><CandidatesNew /></P>} />
-            <Route path="/candidates/:id" element={<P><CandidatesDetail /></P>} />
-            <Route path="/candidates/:id/edit" element={<P><CandidatesEdit /></P>} />
-            <Route path="/institutions" element={<P><InstitutionsList /></P>} />
-            <Route path="/institutions/new" element={<P><InstitutionsNew /></P>} />
-            <Route path="/institutions/:id" element={<P><InstitutionsDetail /></P>} />
-            <Route path="/users" element={<P><UsersList /></P>} />
-            <Route path="/users/new" element={<P><UsersNew /></P>} />
-            <Route path="/users/:id" element={<P><UsersDetail /></P>} />
-            <Route path="/educators" element={<P><EducatorsList /></P>} />
-            <Route path="/educators/new" element={<P><EducatorsNew /></P>} />
-            <Route path="/educators/:id" element={<P><EducatorsDetail /></P>} />
 
             {/* Vagas */}
             <Route path="/vagas" element={<Navigate to="/vagas/gestao" replace />} />
@@ -135,29 +142,42 @@ const App = () => (
             <Route path="/recrutamento/provas" element={<P><ProvasPage /></P>} />
 
             {/* Contratos */}
-            <Route path="/contratos" element={<P><ContractsList /></P>} />
-            <Route path="/contratos/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/contracts" element={<P><ContractsList /></P>} />
-            <Route path="/contracts/new" element={<P><ContractsNew /></P>} />
-            <Route path="/contracts/:id" element={<P><ContractsDetail /></P>} />
-            <Route path="/signatures" element={<P><SignaturesList /></P>} />
+            <Route path="/contratos" element={<P><ContratosIndex /></P>} />
+            <Route path="/contratos/estagio" element={<P><ContratoEstagioPage /></P>} />
+            <Route path="/contratos/assinaturas" element={<P><AssinaturasDigitaisPage /></P>} />
+            <Route path="/contratos/modelos" element={<P><ModelosPage /></P>} />
+            <Route path="/contratos/parceria" element={<P><ContratoParceriaPage /></P>} />
+            <Route path="/contratos/documentos-obrigatorios" element={<P><DocumentosObrigatoriosPage /></P>} />
+            <Route path="/contratos/follow-up" element={<P><FollowUpPage /></P>} />
 
             {/* Gestão de Estágio */}
-            <Route path="/gestao-estagio" element={<P><EstagiosIndex /></P>} />
-            <Route path="/gestao-estagio/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/attendance" element={<P><AttendancePage /></P>} />
-            <Route path="/reports/activities" element={<P><ActivityReportsPage /></P>} />
+            <Route path="/gestao-estagio" element={<P><GestaoEstagioIndex /></P>} />
+            <Route path="/gestao-estagio/frequencia" element={<P><FrequenciaPage /></P>} />
+            <Route path="/gestao-estagio/recesso" element={<P><RecessoPage /></P>} />
+            <Route path="/gestao-estagio/atividades" element={<P><AtividadesPage /></P>} />
+            <Route path="/gestao-estagio/alertas" element={<P><AlertasEstagioPage /></P>} />
 
             {/* Jovem Aprendiz */}
             <Route path="/jovem-aprendiz" element={<P><JovemAprendizIndex /></P>} />
-            <Route path="/jovem-aprendiz/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/programs" element={<P><ProgramsList /></P>} />
-            <Route path="/programs/new" element={<P><ProgramsNew /></P>} />
-            <Route path="/classes" element={<P><ClassesList /></P>} />
-            <Route path="/classes/new" element={<P><ClassesNew /></P>} />
-            <Route path="/occurrences" element={<P><OccurrencesList /></P>} />
-            <Route path="/holidays" element={<P><HolidaysList /></P>} />
-            <Route path="/vacations" element={<P><VacationsList /></P>} />
+            <Route path="/jovem-aprendiz/modelos" element={<P><ModelosJAPage /></P>} />
+            <Route path="/jovem-aprendiz/salas" element={<P><SalasPage /></P>} />
+            <Route path="/jovem-aprendiz/programas" element={<P><ProgramasJAPage /></P>} />
+            <Route path="/jovem-aprendiz/planejamento-turmas" element={<P><PlanejamentoTurmasPage /></P>} />
+            <Route path="/jovem-aprendiz/contrato-ja" element={<P><ContratoJAPage /></P>} />
+            <Route path="/jovem-aprendiz/contrato-pre-ja" element={<P><ContratoPreJAPage /></P>} />
+            <Route path="/jovem-aprendiz/assinaturas" element={<P><AssinaturasJAPage /></P>} />
+            <Route path="/jovem-aprendiz/ocorrencias" element={<P><OcorrenciasJAPage /></P>} />
+            <Route path="/jovem-aprendiz/frequencia" element={<P><FrequenciaJAPage /></P>} />
+            <Route path="/jovem-aprendiz/feriados" element={<P><FeriadosJAPage /></P>} />
+            <Route path="/jovem-aprendiz/ferias" element={<P><FeriasJAPage /></P>} />
+            <Route path="/jovem-aprendiz/gerar-folha" element={<P><GerarFolhaPage /></P>} />
+            <Route path="/jovem-aprendiz/faturas" element={<P><FaturasJAPage /></P>} />
+            <Route path="/jovem-aprendiz/recibo-pagamento" element={<P><ReciboPagamentoPage /></P>} />
+            <Route path="/jovem-aprendiz/perguntas-socio-economicas" element={<P><PerguntasSocioPage /></P>} />
+            <Route path="/jovem-aprendiz/registro-social" element={<P><RegistroSocialPage /></P>} />
+            <Route path="/jovem-aprendiz/cronogramas" element={<P><CronogramasPage /></P>} />
+            <Route path="/jovem-aprendiz/tipos-modulos" element={<P><TiposModulosPage /></P>} />
+            <Route path="/jovem-aprendiz/tipos-curso" element={<P><TiposCursoPage /></P>} />
 
             {/* Financeiro */}
             <Route path="/financeiro" element={<P><FinanceiroIndex /></P>} />
@@ -168,26 +188,22 @@ const App = () => (
             <Route path="/finance/receivable" element={<P><ReceivableList /></P>} />
             <Route path="/finance/payable" element={<P><PayableList /></P>} />
 
-            {/* Relatórios Financeiros */}
+            {/* Relatórios */}
+            <Route path="/relatorios" element={<P><RelatoriosIndex /></P>} />
             <Route path="/relatorios-financeiros" element={<P><FinancialReportsPage /></P>} />
             <Route path="/relatorios-financeiros/*" element={<P><PlaceholderPage /></P>} />
+            <Route path="/relatorios-jovem-aprendiz" element={<P><ApprenticeReportsPage /></P>} />
+            <Route path="/relatorios-jovem-aprendiz/*" element={<P><PlaceholderPage /></P>} />
+            <Route path="/reports/financial" element={<P><FinancialReportsPage /></P>} />
+            <Route path="/reports/apprenticeship" element={<P><ApprenticeReportsPage /></P>} />
 
             {/* NFS-e */}
             <Route path="/nfse" element={<P><PlaceholderPage /></P>} />
             <Route path="/nfse/*" element={<P><PlaceholderPage /></P>} />
 
-            {/* Relatórios Jovem Aprendiz */}
-            <Route path="/relatorios-jovem-aprendiz" element={<P><ApprenticeReportsPage /></P>} />
-            <Route path="/relatorios-jovem-aprendiz/*" element={<P><PlaceholderPage /></P>} />
-
             {/* Social / Psicóloga */}
             <Route path="/social-psicologa" element={<P><PlaceholderPage /></P>} />
             <Route path="/social-psicologa/*" element={<P><PlaceholderPage /></P>} />
-
-            {/* Relatórios (legacy) */}
-            <Route path="/relatorios" element={<P><RelatoriosIndex /></P>} />
-            <Route path="/reports/financial" element={<P><FinancialReportsPage /></P>} />
-            <Route path="/reports/apprenticeship" element={<P><ApprenticeReportsPage /></P>} />
 
             {/* Chamados */}
             <Route path="/chamados" element={<P><TicketsList /></P>} />
@@ -210,7 +226,6 @@ const App = () => (
             <Route path="/outros" element={<P><PlaceholderPage /></P>} />
             <Route path="/outros/*" element={<P><PlaceholderPage /></P>} />
 
-            {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
