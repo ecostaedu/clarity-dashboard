@@ -19,6 +19,13 @@ export function maskPhone(v: string) {
     .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
 }
 
+export function maskCurrency(v: string) {
+  const digits = v.replace(/\D/g, "");
+  if (!digits) return "";
+  const num = (parseInt(digits, 10) / 100).toFixed(2);
+  return "R$ " + num.replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 export function maskCep(v: string) {
   return v.replace(/\D/g, "").slice(0, 8).replace(/(\d{5})(\d{1,3})$/, "$1-$2");
 }
