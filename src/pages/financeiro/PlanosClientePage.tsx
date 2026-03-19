@@ -31,7 +31,7 @@ export default function PlanosClientePage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ id: r.id, name: r.name, repasse: r.repasse, repasse_evento: r.repasse_evento, transporte: r.transporte, recesso: r.recesso, cobranca: r.cobranca, inicio_cobranca: r.inicio_cobranca, active: r.active }); setModal(true); } },
     { label: "Exportar PDF", onClick: () => toast.success("PDF exportado com sucesso!") },
     { label: "Baixar Nomenclaturas", onClick: () => toast.success("CSV baixado com sucesso!") },
   ];

@@ -30,7 +30,7 @@ export default function EventosFolhaPage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ name: r.name, type: r.type, fixed: r.fixed, percent: r.percent, active: r.active }); setModal(true); } },
   ];
 
   const handleSave = () => {

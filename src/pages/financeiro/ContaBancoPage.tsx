@@ -36,7 +36,7 @@ export default function ContaBancoPage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ banco: r.banco, agencia: r.agencia, conta: r.conta, tipo: r.tipo, titular: r.titular, doc: r.doc, active: r.active }); setModal(true); } },
   ];
 
   const handleSave = () => {

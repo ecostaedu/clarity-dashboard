@@ -28,7 +28,7 @@ export default function ContaContabilPage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ code: r.code, description: r.description, type: r.type, active: r.active }); setModal(true); } },
   ];
 
   const handleSave = () => {

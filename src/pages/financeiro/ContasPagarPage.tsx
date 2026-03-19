@@ -38,7 +38,7 @@ export default function ContasPagarPage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ fornecedor: r.fornecedor, description: r.description, valor: r.valor, vencimento: r.vencimento, status: r.status }); setModal(true); } },
     { label: "Marcar como Pago", onClick: (r) => { setData(data.map(d => d.id === r.id ? { ...d, status: "Pago" } : d)); toast.success("Marcado como pago!"); } },
   ];
 

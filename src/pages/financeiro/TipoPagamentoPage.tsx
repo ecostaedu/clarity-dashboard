@@ -26,7 +26,7 @@ export default function TipoPagamentoPage() {
   ];
 
   const actions: ActionConfig[] = [
-    { label: "Editar", onClick: (r) => { setEditing(r); setForm(r); setModal(true); } },
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ name: r.name, description: r.description, active: r.active }); setModal(true); } },
   ];
 
   const handleSave = () => {
