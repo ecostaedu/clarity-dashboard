@@ -15,7 +15,6 @@ import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
 // Dashboard
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import PlaceholderPage from "./pages/PlaceholderPage";
 
 // Cadastros
 import CadastrosIndex from "./pages/cadastros/CadastrosIndex";
@@ -78,17 +77,42 @@ import TiposCursoPage from "./pages/jovem-aprendiz/TiposCursoPage";
 
 // Financeiro
 import FinanceiroIndex from "./pages/financeiro/FinanceiroIndex";
-import { PlansList, PlansNew, InvoicesList, ReceivableList, PayableList } from "./pages/finance/FinancePages";
+import BancosPage from "./pages/financeiro/BancosPage";
+import FornecedoresPage from "./pages/financeiro/FornecedoresPage";
+import PlanosClientePage from "./pages/financeiro/PlanosClientePage";
+import ContaContabilPage from "./pages/financeiro/ContaContabilPage";
+import EventosFolhaPage from "./pages/financeiro/EventosFolhaPage";
+import TipoPagamentoPage from "./pages/financeiro/TipoPagamentoPage";
+import ContaBancoPage from "./pages/financeiro/ContaBancoPage";
+import CalculoFolhaPage from "./pages/financeiro/CalculoFolhaPage";
+import FaturasFinPage from "./pages/financeiro/FaturasFinPage";
+import ContasReceberPage from "./pages/financeiro/ContasReceberPage";
+import ContasPagarPage from "./pages/financeiro/ContasPagarPage";
+import ReciboPagRescisaoPage from "./pages/financeiro/ReciboPagRescisaoPage";
+import InformesRendimentosPage from "./pages/financeiro/InformesRendimentosPage";
+import FolhasAjustadasPage from "./pages/financeiro/FolhasAjustadasPage";
+import SaldoBancarioPage from "./pages/financeiro/SaldoBancarioPage";
+import MovimentoAnaliticoPage from "./pages/financeiro/MovimentoAnaliticoPage";
+import ExtratoBancarioPage from "./pages/financeiro/ExtratoBancarioPage";
+import NfseEmissaoPage from "./pages/financeiro/NfseEmissaoPage";
 
 // Relatórios
 import RelatoriosIndex from "./pages/relatorios/RelatoriosIndex";
-import { FinancialReportsPage, ApprenticeReportsPage } from "./pages/reports/ReportsPages";
+import RelatoriosJAPage from "./pages/relatorios/RelatoriosJAPage";
 
-// Chamados
-import { TicketsList, TicketsNew, TicketsDetail } from "./pages/tickets/TicketsPages";
+// Social / Psicóloga
+import SocialIndex from "./pages/social/SocialIndex";
+import ModelosSocialPage from "./pages/social/ModelosSocialPage";
+import JovensAcompanhamentoPage from "./pages/social/JovensAcompanhamentoPage";
+import TiposAtendimentoPage from "./pages/social/TiposAtendimentoPage";
+import AtendimentosPage from "./pages/social/AtendimentosPage";
 
-// CRM
-import { OpportunitiesList } from "./pages/crm/CrmPages";
+// Outros
+import OutrosIndex from "./pages/outros/OutrosIndex";
+import SeguroPage from "./pages/outros/SeguroPage";
+import ImportacoesPage from "./pages/outros/ImportacoesPage";
+import ChamadosPage from "./pages/outros/ChamadosPage";
+import CrmPage from "./pages/outros/CrmPage";
 
 // Configurações
 import ConfiguracoesIndex from "./pages/configuracoes/ConfiguracoesIndex";
@@ -181,50 +205,55 @@ const App = () => (
 
             {/* Financeiro */}
             <Route path="/financeiro" element={<P><FinanceiroIndex /></P>} />
-            <Route path="/financeiro/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/plans" element={<P><PlansList /></P>} />
-            <Route path="/plans/new" element={<P><PlansNew /></P>} />
-            <Route path="/invoices" element={<P><InvoicesList /></P>} />
-            <Route path="/finance/receivable" element={<P><ReceivableList /></P>} />
-            <Route path="/finance/payable" element={<P><PayableList /></P>} />
+            <Route path="/financeiro/bancos" element={<P><BancosPage /></P>} />
+            <Route path="/financeiro/fornecedores" element={<P><FornecedoresPage /></P>} />
+            <Route path="/financeiro/planos-cliente" element={<P><PlanosClientePage /></P>} />
+            <Route path="/financeiro/conta-contabil" element={<P><ContaContabilPage /></P>} />
+            <Route path="/financeiro/eventos-folha" element={<P><EventosFolhaPage /></P>} />
+            <Route path="/financeiro/tipo-pagamento" element={<P><TipoPagamentoPage /></P>} />
+            <Route path="/financeiro/conta-banco-personalizada" element={<P><ContaBancoPage /></P>} />
+            <Route path="/financeiro/calculo-folha" element={<P><CalculoFolhaPage /></P>} />
+            <Route path="/financeiro/faturas" element={<P><FaturasFinPage /></P>} />
+            <Route path="/financeiro/contas-receber" element={<P><ContasReceberPage /></P>} />
+            <Route path="/financeiro/contas-pagar" element={<P><ContasPagarPage /></P>} />
+            <Route path="/financeiro/recibo-pagamento-rescisao" element={<P><ReciboPagRescisaoPage /></P>} />
+            <Route path="/financeiro/informes-rendimentos" element={<P><InformesRendimentosPage /></P>} />
+            <Route path="/financeiro/folhas-ajustadas" element={<P><FolhasAjustadasPage /></P>} />
+            <Route path="/financeiro/saldo-bancario" element={<P><SaldoBancarioPage /></P>} />
+
+            {/* Relatórios Financeiros */}
+            <Route path="/relatorios-financeiros/movimento-analitico" element={<P><MovimentoAnaliticoPage /></P>} />
+            <Route path="/relatorios-financeiros/extrato-bancario" element={<P><ExtratoBancarioPage /></P>} />
+            <Route path="/relatorios-financeiros" element={<Navigate to="/relatorios-financeiros/movimento-analitico" replace />} />
+
+            {/* NFS-e */}
+            <Route path="/nfse" element={<Navigate to="/nfse/emissao" replace />} />
+            <Route path="/nfse/emissao" element={<P><NfseEmissaoPage /></P>} />
 
             {/* Relatórios */}
             <Route path="/relatorios" element={<P><RelatoriosIndex /></P>} />
-            <Route path="/relatorios-financeiros" element={<P><FinancialReportsPage /></P>} />
-            <Route path="/relatorios-financeiros/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/relatorios-jovem-aprendiz" element={<P><ApprenticeReportsPage /></P>} />
-            <Route path="/relatorios-jovem-aprendiz/*" element={<P><PlaceholderPage /></P>} />
-            <Route path="/reports/financial" element={<P><FinancialReportsPage /></P>} />
-            <Route path="/reports/apprenticeship" element={<P><ApprenticeReportsPage /></P>} />
-
-            {/* NFS-e */}
-            <Route path="/nfse" element={<P><PlaceholderPage /></P>} />
-            <Route path="/nfse/*" element={<P><PlaceholderPage /></P>} />
+            <Route path="/relatorios-jovem-aprendiz" element={<P><RelatoriosJAPage /></P>} />
+            <Route path="/relatorios-jovem-aprendiz/especificos" element={<P><RelatoriosJAPage /></P>} />
 
             {/* Social / Psicóloga */}
-            <Route path="/social-psicologa" element={<P><PlaceholderPage /></P>} />
-            <Route path="/social-psicologa/*" element={<P><PlaceholderPage /></P>} />
+            <Route path="/social-psicologa" element={<P><SocialIndex /></P>} />
+            <Route path="/social-psicologa/modelos" element={<P><ModelosSocialPage /></P>} />
+            <Route path="/social-psicologa/jovens-aprendizes" element={<P><JovensAcompanhamentoPage /></P>} />
+            <Route path="/social-psicologa/tipos-atendimento" element={<P><TiposAtendimentoPage /></P>} />
+            <Route path="/social-psicologa/atendimentos" element={<P><AtendimentosPage /></P>} />
 
-            {/* Chamados */}
-            <Route path="/chamados" element={<P><TicketsList /></P>} />
-            <Route path="/tickets" element={<P><TicketsList /></P>} />
-            <Route path="/tickets/new" element={<P><TicketsNew /></P>} />
-            <Route path="/tickets/:id" element={<P><TicketsDetail /></P>} />
-
-            {/* CRM */}
-            <Route path="/crm" element={<P><OpportunitiesList /></P>} />
-            <Route path="/crm/*" element={<P><PlaceholderPage /></P>} />
+            {/* Outros */}
+            <Route path="/outros" element={<P><OutrosIndex /></P>} />
+            <Route path="/outros/seguro" element={<P><SeguroPage /></P>} />
+            <Route path="/outros/importacoes" element={<P><ImportacoesPage /></P>} />
+            <Route path="/outros/chamados" element={<P><ChamadosPage /></P>} />
+            <Route path="/outros/crm" element={<P><CrmPage /></P>} />
 
             {/* Configurações */}
             <Route path="/configuracoes" element={<P><ConfiguracoesIndex /></P>} />
-            <Route path="/configuracoes/*" element={<P><PlaceholderPage /></P>} />
             <Route path="/settings/alerts" element={<P><AlertSettingsPage /></P>} />
             <Route path="/settings/roles" element={<P><RolesSettingsPage /></P>} />
             <Route path="/settings/system" element={<P><SystemSettingsPage /></P>} />
-
-            {/* Outros */}
-            <Route path="/outros" element={<P><PlaceholderPage /></P>} />
-            <Route path="/outros/*" element={<P><PlaceholderPage /></P>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
