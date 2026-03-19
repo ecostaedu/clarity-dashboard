@@ -1,0 +1,71 @@
+import { useState } from "react";
+import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { DataTable, Column, FilterConfig, ActionConfig } from "@/components/DataTable";
+import { FormModal } from "@/components/FormModal";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
+
+const initial = [
+  { id: "1", fornecedor: "SENAI SP", description: "Curso técnico", valor: 12000, vencimento: "10/03/2024", status: "Pago" },
+  { id: "2", fornecedor: "AWS", description: "Cloud computing", valor: 3500, vencimento: "15/03/2024", status: "Aberto" },
+  { id: "3", fornecedor: "Google", description: "Workspace", valor: 890, vencimento: "01/02/2024", status: "Atrasado" },
+];
+
+const statusBadge = (v: string) => {
+  const c = v === "Pago" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : v === "Atrasado" ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400";
+  return <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold ${c}`}>{v}</span>;
+};
+
+export default function ContasPagarPage() {
+  const [data, setData] = useState(initial);
+  const [modal, setModal] = useState(false);
+  const [editing, setEditing] = useState<any>(null);
+  const [form, setForm] = useState({ fornecedor: "", description: "", valor: 0, vencimento: "", status: "Aberto" });
+
+  const columns: Column[] = [
+    { key: "fornecedor", label: "Fornecedor", sortable: true },
+    { key: "description", label: "Descrição" },
+    { key: "valor", label: "Valor", render: (v) => `R$ ${Number(v).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}` },
+    { key: "vencimento", label: "Vencimento" },
+    { key: "status", label: "Status", render: statusBadge },
+  ];
+
+  const filters: FilterConfig[] = [
+    { key: "fornecedor", label: "Fornecedor", type: "text" },
+    { key: "status", label: "Status", type: "select", options: [{ label: "Aberto", value: "Aberto" }, { label: "Pago", value: "Pago" }, { label: "Atrasado", value: "Atrasado" }] },
+  ];
+
+  const actions: ActionConfig[] = [
+    { label: "Editar", onClick: (r) => { setEditing(r); setForm({ fornecedor: r.fornecedor, description: r.description, valor: r.valor, vencimento: r.vencimento, status: r.status }); setModal(true); } },
+    { label: "Marcar como Pago", onClick: (r) => { setData(data.map(d => d.id === r.id ? { ...d, status: "Pago" } : d)); toast.success("Marcado como pago!"); } },
+  ];
+
+  const handleSave = () => {
+    if (!form.fornecedor) { toast.error("Preencha os campos obrigatórios."); return; }
+    if (editing) { setData(data.map(d => d.id === editing.id ? { ...d, ...form } : d)); toast.success("Atualizado!"); }
+    else { setData([...data, { id: String(Date.now()), ...form }]); toast.success("Criado!"); }
+    setModal(false); setEditing(null);
+  };
+
+  return (
+    <DashboardLayout breadcrumbs={[{ label: "Home" }, { label: "Financeiro" }, { label: "Contas a Pagar" }]}>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div><h1 className="text-2xl font-bold text-foreground">Contas a Pagar</h1><p className="text-sm text-muted-foreground">{data.length} registros.</p></div>
+          <button onClick={() => { setEditing(null); setForm({ fornecedor: "", description: "", valor: 0, vencimento: "", status: "Aberto" }); setModal(true); }} className="h-9 px-4 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">Novo</button>
+        </div>
+        <DataTable columns={columns} data={data} filters={filters} actions={actions} />
+      </div>
+      <FormModal open={modal} onClose={() => { setModal(false); setEditing(null); }} title={editing ? "Editar" : "Nova Conta a Pagar"} onSave={handleSave}>
+        <div className="space-y-4">
+          <div><Label>Fornecedor *</Label><Select value={form.fornecedor} onValueChange={v => setForm({ ...form, fornecedor: v })}><SelectTrigger><SelectValue placeholder="Selecione" /></SelectTrigger><SelectContent><SelectItem value="SENAI SP">SENAI SP</SelectItem><SelectItem value="AWS">AWS</SelectItem><SelectItem value="Google">Google</SelectItem></SelectContent></Select></div>
+          <div><Label>Descrição</Label><Input value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></div>
+          <div><Label>Valor (R$)</Label><Input type="number" value={form.valor} onChange={e => setForm({ ...form, valor: Number(e.target.value) })} /></div>
+          <div><Label>Vencimento</Label><Input type="date" value={form.vencimento} onChange={e => setForm({ ...form, vencimento: e.target.value })} /></div>
+        </div>
+      </FormModal>
+    </DashboardLayout>
+  );
+}
